@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import {
   Settings2,
   ImagePlus,
@@ -11,9 +12,11 @@ import {
   Sparkles,
   Loader2,
   ShieldCheck,
+  LogIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
+import { createClient } from "@/lib/supabase/client";
 
 const PROMPT_PLACEHOLDERS = [
   "What is the procedure and grounds for anticipatory bail under Section 482 of BNSS vs 438 CrPC?",
@@ -103,6 +106,9 @@ interface LegalAnalysis {
 }
 
 export default function Prompt() {
+  const router = useRouter();
+  const supabase = createClient();
+
   const [promptText, setPromptText] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
@@ -130,9 +136,49 @@ export default function Prompt() {
   );
   const [hasCopied, setHasCopied] = useState(false);
 
+  // Auth state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [authBanner, setAuthBanner] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const supabaseRef = useRef<ReturnType<typeof createClient> | null>(null);
+
+  // Lazy getter — only creates client in the browser
+  const getSupabase = useCallback(() => {
+    if (!supabaseRef.current) {
+      supabaseRef.current = createClient();
+    }
+    return supabaseRef.current;
+  }, []);
+
+  // Check auth session on mount (browser only)
+  useEffect(() => {
+    const supabase = getSupabase();
+
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+      setAuthLoading(false);
+    };
+    checkSession();
+
+    // Listen for auth state changes (sign in / sign out)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      (_event: string, session: { user: unknown } | null) => {
+        setIsAuthenticated(!!session);
+        if (session) setAuthBanner(false);
+      },
+    );
+
+    return () => subscription.unsubscribe();
+  }, [getSupabase]);
 
   // Pick random placeholder on mount
   useEffect(() => {
@@ -247,6 +293,15 @@ export default function Prompt() {
     const query = promptText.trim();
     if (!query && attachedFiles.length === 0) {
       if (textareaRef.current) textareaRef.current.focus();
+      return;
+    }
+
+    // Auth guard: block unauthenticated submissions
+    if (!isAuthenticated) {
+      setAuthBanner(true);
+      setTimeout(() => {
+        router.push("/auth");
+      }, 2000);
       return;
     }
 
@@ -401,6 +456,41 @@ export default function Prompt() {
           years of Supreme Court & High Court precedents.
         </motion.p>
       </div>
+
+      {/* Auth Required Banner */}
+      <AnimatePresence>
+        {authBanner && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.97 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full rounded-xl border border-accent-lime/30 bg-accent-lime/10 px-4 py-3 shadow-sm"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-lime/20">
+                <LogIn className="size-4 text-accent-lime" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-foreground">
+                  Please sign in to use Counsel AI
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Redirecting to sign in page...
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="shrink-0 text-xs border-accent-lime/30 hover:bg-accent-lime/15"
+                onClick={() => router.push("/auth")}
+              >
+                Sign in
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Input Box Card */}
       <motion.div
