@@ -133,7 +133,10 @@ export default function Navbar() {
                 transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-2 overflow-hidden rounded-xl border border-border/70 bg-background/95 p-3 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#161616]/95 md:hidden"
               >
-                <nav className="flex flex-col gap-1" aria-label="Mobile Navigation">
+                <nav
+                  className="flex flex-col gap-1"
+                  aria-label="Mobile Navigation"
+                >
                   <Link
                     href="/"
                     onClick={() => setIsOpen(false)}

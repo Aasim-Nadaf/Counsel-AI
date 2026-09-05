@@ -104,7 +104,8 @@ export function PricingSection() {
           Precision Legal Intelligence Plans
         </h2>
         <p className="text-center text-muted-foreground text-sm md:text-base">
-          100% verified citations, zero hallucinations. Tailored research plans for solo advocates, litigators, and law firms across India.
+          100% verified citations, zero hallucinations. Tailored research plans
+          for solo advocates, litigators, and law firms across India.
         </p>
       </div>
 

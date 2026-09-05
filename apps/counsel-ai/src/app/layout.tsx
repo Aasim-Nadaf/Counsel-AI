@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
@@ -20,7 +21,11 @@ export const metadata: Metadata = {
     "100% verified Indian legal intelligence. Instant case research across BNS, BNSS, IPC, CrPC, Constitution of India, and Supreme Court judgments with zero hallucinations.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
     <html
       lang="en"

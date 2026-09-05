@@ -1,5 +1,5 @@
 {
-  "name": "counsel-ai",
+  "name": "counsel-ai-workspace",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -13,6 +13,10 @@
     "turbo": "^2.10.12",
     "typescript": "7.0.2"
   },
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ],
   "engines": {
     "node": ">=24"
   },

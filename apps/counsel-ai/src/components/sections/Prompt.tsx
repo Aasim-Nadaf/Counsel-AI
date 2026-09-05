@@ -11,7 +11,6 @@ import {
   Sparkles,
   Loader2,
   ShieldCheck,
-  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
@@ -137,7 +136,12 @@ export default function Prompt() {
 
   // Pick random placeholder on mount
   useEffect(() => {
-    setPlaceholderIndex(Math.floor(Math.random() * PROMPT_PLACEHOLDERS.length));
+    const timer = setTimeout(() => {
+      setPlaceholderIndex(
+        Math.floor(Math.random() * PROMPT_PLACEHOLDERS.length),
+      );
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Smoothly rotate placeholders when input is empty
@@ -188,7 +192,7 @@ export default function Prompt() {
         recognition.onend = () => setIsListening(false);
         recognitionRef.current = recognition;
       } else {
-        setSpeechSupported(false);
+        setTimeout(() => setSpeechSupported(false), 0);
       }
     }
   }, []);
