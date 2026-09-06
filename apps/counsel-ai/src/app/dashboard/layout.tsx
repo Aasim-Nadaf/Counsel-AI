@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={handleNewChat}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-accent-lime px-3 py-1.5 text-xs font-semibold text-dark-obsidian shadow-xs transition-colors hover:bg-[#B8E12A] cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 cursor-pointer"
             >
               <Plus className="size-3.5" />
               <span>New Chat</span>
