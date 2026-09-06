@@ -1,16 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Menu, X, ChevronRight, LogOut, User } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronRight,
+  LogOut,
+  User,
+  LayoutDashboard,
+} from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
@@ -100,6 +108,11 @@ export default function Navbar() {
     if (!user?.email) return "U";
     return user.email.charAt(0).toUpperCase();
   };
+
+  // Hide marketing navbar on dashboard
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   return (
     <>
@@ -200,6 +213,14 @@ export default function Navbar() {
                             Signed in
                           </p>
                         </div>
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-secondary cursor-pointer"
+                        >
+                          <LayoutDashboard className="size-3.5 text-accent-lime" />
+                          Dashboard
+                        </Link>
                         <button
                           type="button"
                           onClick={handleSignOut}
@@ -296,6 +317,17 @@ export default function Navbar() {
                         </p>
                       </div>
                     </div>
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setIsOpen(false)}
+                      className="flex w-full items-center justify-between rounded-lg bg-secondary px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary/70"
+                    >
+                      <span className="flex items-center gap-2">
+                        <LayoutDashboard className="size-4 text-accent-lime" />
+                        Dashboard
+                      </span>
+                      <ChevronRight className="size-4 text-muted-foreground/60" />
+                    </Link>
                     <button
                       type="button"
                       onClick={handleSignOut}
