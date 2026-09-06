@@ -190,7 +190,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex size-8 items-center justify-center rounded-full bg-accent-lime text-sm font-bold text-dark-obsidian ring-2 ring-accent-lime/30 transition-all hover:ring-accent-lime/60 cursor-pointer"
+                    className="flex size-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground ring-2 ring-primary/30 transition-all hover:ring-primary/60 cursor-pointer"
                     aria-label="User menu"
                   >
                     {getUserInitials()}
@@ -218,7 +218,7 @@ export default function Navbar() {
                           onClick={() => setUserMenuOpen(false)}
                           className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-secondary cursor-pointer"
                         >
-                          <LayoutDashboard className="size-3.5 text-accent-lime" />
+                          <LayoutDashboard className="size-3.5 text-primary" />
                           Dashboard
                         </Link>
                         <button
@@ -237,7 +237,7 @@ export default function Navbar() {
               ) : (
                 /* Signed out: Sign in button */
                 <Link href="/auth">
-                  <Button className="inline-flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-md bg-accent-lime px-3 text-sm font-semibold text-dark-obsidian shadow-xs transition-colors hover:bg-[#B8E12A]">
+                  <Button className="inline-flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-md bg-primary px-3 text-sm font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90">
                     Sign in
                   </Button>
                 </Link>
@@ -308,7 +308,7 @@ export default function Navbar() {
                   /* Signed in: Show email + sign out */
                   <div className="space-y-2 pt-1">
                     <div className="flex items-center gap-2.5 px-3 py-1.5">
-                      <div className="flex size-8 items-center justify-center rounded-full bg-accent-lime text-sm font-bold text-dark-obsidian">
+                      <div className="flex size-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                         {getUserInitials()}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -323,7 +323,7 @@ export default function Navbar() {
                       className="flex w-full items-center justify-between rounded-lg bg-secondary px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary/70"
                     >
                       <span className="flex items-center gap-2">
-                        <LayoutDashboard className="size-4 text-accent-lime" />
+                        <LayoutDashboard className="size-4 text-primary" />
                         Dashboard
                       </span>
                       <ChevronRight className="size-4 text-muted-foreground/60" />
@@ -345,7 +345,7 @@ export default function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className="block w-full pt-1"
                   >
-                    <Button className="h-10 w-full cursor-pointer items-center justify-center rounded-lg bg-accent-lime text-sm font-semibold text-dark-obsidian shadow-xs transition-colors hover:bg-[#B8E12A]">
+                    <Button className="h-10 w-full cursor-pointer items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90">
                       Sign in
                     </Button>
                   </Link>

@@ -37,7 +37,7 @@ const DRAFT_TEMPLATES = [
     title: "Section 138 NI Act Notice",
     desc: "Demand notice for cheque bounce with 15-day statutory period",
     prompt:
-      "Draft a formal statutory legal notice under Section 138 of the Negotiable Instruments Act, 1881 for cheque dishonour with the following details:\n- Complainant / Payee: [Name]\n- Drawer / Accused: [Name]\n- Cheque No: [Cheque No], Dated: [Date], Amount: ₹[Amount]\n- Bank & Branch: [Bank Name]\n- Reason for Return: Funds Insufficient (Memo dated: [Date])\n- Statutory Demand: Pay within 15 days of receipt failing which criminal prosecution shall follow.",
+      "Draft a formal statutory legal notice under Section 138 of the Negotiable Instruments Act, 1881 for cheque dishonour with the following details:\n- Complainant / Payee: [Name]\n- Drawer / Accused: [Name]\n- Cheque No: [Cheque No], Dated: [Date], Amount: â‚¹[Amount]\n- Bank & Branch: [Bank Name]\n- Reason for Return: Funds Insufficient (Memo dated: [Date])\n- Statutory Demand: Pay within 15 days of receipt failing which criminal prosecution shall follow.",
   },
   {
     id: "bail-bnss",
@@ -65,7 +65,7 @@ const DRAFT_TEMPLATES = [
     title: "Notice for Breach of Contract",
     desc: "Pre-litigation legal notice invoking dispute resolution clause",
     prompt:
-      "Draft a comprehensive pre-litigation legal notice for material breach of Master Services Agreement, claiming damages of ₹[Amount] and invoking the mandatory 30-day cure period prior to commencing arbitration under the Arbitration and Conciliation Act, 1996.",
+      "Draft a comprehensive pre-litigation legal notice for material breach of Master Services Agreement, claiming damages of â‚¹[Amount] and invoking the mandatory 30-day cure period prior to commencing arbitration under the Arbitration and Conciliation Act, 1996.",
   },
 ];
 
@@ -146,7 +146,7 @@ export default function Prompt() {
   const containerRef = useRef<HTMLDivElement>(null);
   const supabaseRef = useRef<ReturnType<typeof createClient> | null>(null);
 
-  // Lazy getter — only creates client in the browser
+  // Lazy getter â€” only creates client in the browser
   const getSupabase = useCallback(() => {
     if (!supabaseRef.current) {
       supabaseRef.current = createClient();
@@ -451,7 +451,7 @@ export default function Prompt() {
   const copyAnalysis = () => {
     if (!legalResponse) return;
     const text = `Counsel AI - Verified Legal Analysis\n\nGoverning Law: ${legalResponse.act}\nSections: ${legalResponse.keySection}\n\nSummary:\n${legalResponse.summary}\n\nKey Precedents:\n${legalResponse.precedents
-      .map((p) => `• ${p.title} [${p.citation}]: ${p.principle}`)
+      .map((p) => `â€¢ ${p.title} [${p.citation}]: ${p.principle}`)
       .join("\n")}\n\nVerification Hash: ${legalResponse.verificationHash}`;
     navigator.clipboard.writeText(text);
     setHasCopied(true);
@@ -495,11 +495,11 @@ export default function Prompt() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full rounded-xl border border-accent-lime/30 bg-accent-lime/10 px-4 py-3 shadow-sm"
+            className="w-full rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 shadow-sm"
           >
             <div className="flex items-center gap-3">
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-lime/20">
-                <LogIn className="size-4 text-accent-lime" />
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/20">
+                <LogIn className="size-4 text-primary" />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">
@@ -512,7 +512,7 @@ export default function Prompt() {
               <Button
                 variant="outline"
                 size="sm"
-                className="shrink-0 text-xs border-accent-lime/30 hover:bg-accent-lime/15"
+                className="shrink-0 text-xs border-primary/30 hover:bg-primary/15"
                 onClick={() => router.push("/auth")}
               >
                 Sign in
@@ -572,7 +572,7 @@ export default function Prompt() {
                         key={code}
                         className="inline-flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 font-mono text-[11px] font-medium text-foreground border border-border"
                       >
-                        <Scale className="size-3 text-accent-lime" />
+                        <Scale className="size-3 text-primary" />
                         {code}
                         <button
                           type="button"
@@ -712,13 +712,13 @@ export default function Prompt() {
                                   onClick={() => setSelectedBench(bench)}
                                   className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors flex items-center justify-between cursor-pointer ${
                                     selectedBench === bench
-                                      ? "bg-accent-lime/15 text-foreground font-semibold"
+                                      ? "bg-primary/15 text-foreground font-semibold"
                                       : "hover:bg-muted text-muted-foreground hover:text-foreground"
                                   }`}
                                 >
                                   <span className="truncate">{bench}</span>
                                   {selectedBench === bench && (
-                                    <Check className="size-3 text-accent-lime shrink-0 ml-1" />
+                                    <Check className="size-3 text-primary shrink-0 ml-1" />
                                   )}
                                 </button>
                               ))}
@@ -735,7 +735,7 @@ export default function Prompt() {
                                   onChange={(e) =>
                                     setStrictZeroHallucination(e.target.checked)
                                   }
-                                  className="accent-accent-lime"
+                                  className="accent-primary"
                                 />
                               </label>
                               <label className="flex items-center justify-between cursor-pointer select-none">
@@ -748,7 +748,7 @@ export default function Prompt() {
                                   onChange={(e) =>
                                     setIncludeBnsMapping(e.target.checked)
                                   }
-                                  className="accent-accent-lime"
+                                  className="accent-primary"
                                 />
                               </label>
                             </div>
@@ -832,7 +832,7 @@ export default function Prompt() {
                                   }
                                   className="w-full text-left p-2 rounded-lg transition-colors hover:bg-muted group cursor-pointer border border-transparent hover:border-border"
                                 >
-                                  <div className="text-xs font-semibold text-foreground group-hover:text-accent-lime transition-colors">
+                                  <div className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">
                                     {tmpl.title}
                                   </div>
                                   <div className="text-[11px] text-muted-foreground line-clamp-1 mt-0.5">
@@ -916,7 +916,7 @@ export default function Prompt() {
                                     onClick={() => toggleStatute(st.code)}
                                     className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors flex items-center justify-between cursor-pointer ${
                                       isSelected
-                                        ? "bg-accent-lime/15 text-foreground font-semibold"
+                                        ? "bg-primary/15 text-foreground font-semibold"
                                         : "hover:bg-muted text-muted-foreground hover:text-foreground"
                                     }`}
                                   >
@@ -929,7 +929,7 @@ export default function Prompt() {
                                       </span>
                                     </div>
                                     {isSelected && (
-                                      <Check className="size-3 text-accent-lime shrink-0" />
+                                      <Check className="size-3 text-primary shrink-0" />
                                     )}
                                   </button>
                                 );
@@ -1008,7 +1008,7 @@ export default function Prompt() {
                     <Button
                       type="submit"
                       disabled={isAnalyzing}
-                      className="inline-flex size-7 items-center justify-center rounded-md bg-accent-lime text-dark-obsidian shadow-xs ring-1 ring-black/10 transition-colors hover:bg-[#B8E12A] cursor-pointer disabled:opacity-50"
+                      className="inline-flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-xs ring-1 ring-black/10 transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50"
                       aria-label="Send message"
                     >
                       {isAnalyzing ? (
@@ -1052,7 +1052,7 @@ export default function Prompt() {
             {/* Header: Verified Stamp & Actions */}
             <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border/70">
               <div className="flex items-center gap-2">
-                <span className="flex size-6 items-center justify-center rounded-full bg-accent-lime/20 text-accent-lime">
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary/20 text-primary">
                   <ShieldCheck className="size-3.5" />
                 </span>
                 <div>
@@ -1073,7 +1073,7 @@ export default function Prompt() {
                 >
                   {hasCopied ? (
                     <>
-                      <Check className="size-3 text-accent-lime" />
+                      <Check className="size-3 text-primary" />
                       <span>Copied</span>
                     </>
                   ) : (
@@ -1133,7 +1133,7 @@ export default function Prompt() {
                         <span className="font-semibold text-foreground">
                           {prec.title}
                         </span>
-                        <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-accent-lime/15 text-foreground font-medium">
+                        <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-primary/15 text-foreground font-medium">
                           {prec.citation}
                         </span>
                       </div>
@@ -1148,7 +1148,7 @@ export default function Prompt() {
               {/* Verification Stamp Footer */}
               <div className="pt-2 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-muted-foreground border-t border-border/50">
                 <span className="flex items-center gap-1.5">
-                  <Sparkles className="size-3 text-accent-lime" />
+                  <Sparkles className="size-3 text-primary" />
                   <span>
                     Cross-verified against Indian Supreme Court Precedent
                     Repository

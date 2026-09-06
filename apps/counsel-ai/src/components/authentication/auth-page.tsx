@@ -107,7 +107,7 @@ export function AuthPage() {
           return;
         }
 
-        // Successful sign-in — redirect to dashboard
+        // Successful sign-in â€” redirect to dashboard
         router.push("/dashboard");
         router.refresh();
       }
@@ -124,8 +124,8 @@ export function AuthPage() {
       <div className="relative w-full overflow-hidden px-4 md:h-screen">
         <div className="relative mx-auto flex min-h-screen w-full max-w-sm flex-col justify-center border-x *:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
-            <div className="flex size-16 items-center justify-center rounded-full bg-accent-lime/15">
-              <MailIcon className="size-7 text-accent-lime" />
+            <div className="flex size-16 items-center justify-center rounded-full bg-primary/15">
+              <MailIcon className="size-7 text-primary" />
             </div>
             <div className="space-y-1.5">
               <h1 className="text-xl font-semibold tracking-wide">
@@ -286,7 +286,7 @@ export function AuthPage() {
                   <CheckCircle2
                     className={`size-3 ${
                       password.length >= 8
-                        ? "text-accent-lime"
+                        ? "text-primary"
                         : "text-muted-foreground/40"
                     }`}
                   />
@@ -332,7 +332,7 @@ export function AuthPage() {
               Don&apos;t have an account?{" "}
               <button
                 type="button"
-                className="font-medium text-foreground underline underline-offset-4 hover:text-accent-lime cursor-pointer"
+                className="font-medium text-foreground underline underline-offset-4 hover:text-primary cursor-pointer"
                 onClick={() => {
                   setMode("sign-up");
                   setError(null);
@@ -346,7 +346,7 @@ export function AuthPage() {
               Already have an account?{" "}
               <button
                 type="button"
-                className="font-medium text-foreground underline underline-offset-4 hover:text-accent-lime cursor-pointer"
+                className="font-medium text-foreground underline underline-offset-4 hover:text-primary cursor-pointer"
                 onClick={() => {
                   setMode("sign-in");
                   setError(null);
