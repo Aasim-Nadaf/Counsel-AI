@@ -164,7 +164,7 @@ export function DashboardSidebar() {
           onClick={handleNewChat}
           className="flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-muted/50 cursor-pointer"
         >
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-lime text-dark-obsidian shadow-sm ring-1 ring-black/5">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm ring-1 ring-black/5">
             <Scale className="size-5" />
           </div>
           {open && (
@@ -190,7 +190,7 @@ export function DashboardSidebar() {
                 <AnimatedSidebarMenuButton
                   onSelect={handleNewChat}
                   icon={<Plus className="size-4" />}
-                  className="bg-accent-lime text-dark-obsidian font-semibold hover:bg-[#B8E12A] hover:text-dark-obsidian shadow-xs"
+                  className="bg-primary text-primary-foreground font-semibold hover:bg-primary/90 hover:text-primary-foreground shadow-xs"
                 >
                   New Chat
                 </AnimatedSidebarMenuButton>
@@ -281,7 +281,7 @@ export function DashboardSidebar() {
       {/* Footer / User Profile */}
       <AnimatedSidebarFooter>
         <div className="flex items-center gap-3">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-lime text-xs font-bold text-dark-obsidian ring-2 ring-accent-lime/30">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary text-xs font-bold text-primary-foreground ring-2 ring-primary/30">
             {getUserInitials()}
           </div>
           {open && (

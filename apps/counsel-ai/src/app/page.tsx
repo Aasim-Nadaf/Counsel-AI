@@ -12,9 +12,9 @@ export default function HeroSection() {
       {/* Ambient Gradient Waves Background */}
       <div className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-100 dark:opacity-35">
         <GradientWaves
-          horizonColor="#C8F135"
-          waveColor="#F5F2EC"
-          crestColor="#0F0F0F"
+          horizonColor="#BA8454"
+          waveColor="#F6F4F0"
+          crestColor="#2C2A28"
           speed={0.15}
           amplitude={1.25}
           waveScale={1.25}
