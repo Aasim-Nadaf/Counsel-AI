@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AnimatedSidebarProvider defaultOpen={true}>
+    <AnimatedSidebarProvider defaultOpen={false}>
       <DashboardSidebar />
       <AnimatedSidebarInset className="bg-background">
         {/* Top Header */}
