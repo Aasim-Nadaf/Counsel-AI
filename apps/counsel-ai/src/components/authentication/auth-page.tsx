@@ -75,7 +75,7 @@ export function AuthPage() {
           email: email.trim(),
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/confirm`,
+            emailRedirectTo: `${window.location.origin}/auth/confirm?next=/dashboard`,
           },
         });
 
@@ -107,8 +107,8 @@ export function AuthPage() {
           return;
         }
 
-        // Successful sign-in — redirect to home
-        router.push("/");
+        // Successful sign-in — redirect to dashboard
+        router.push("/dashboard");
         router.refresh();
       }
     } catch {

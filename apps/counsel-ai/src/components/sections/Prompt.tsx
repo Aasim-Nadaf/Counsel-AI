@@ -190,6 +190,36 @@ export default function Prompt() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Listen for new-chat / select-chat events from sidebar
+  useEffect(() => {
+    const handleNewChat = () => {
+      setPromptText("");
+      setLegalResponse(null);
+      setAttachedFiles([]);
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+      }
+    };
+
+    const handleSelectChat = (e: Event) => {
+      const customEvent = e as CustomEvent<{ query?: string }>;
+      if (customEvent.detail?.query) {
+        setPromptText(customEvent.detail.query);
+        setLegalResponse(null);
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+        }
+      }
+    };
+
+    window.addEventListener("counsel:new-chat", handleNewChat);
+    window.addEventListener("counsel:select-chat", handleSelectChat);
+    return () => {
+      window.removeEventListener("counsel:new-chat", handleNewChat);
+      window.removeEventListener("counsel:select-chat", handleSelectChat);
+    };
+  }, []);
+
   // Smoothly rotate placeholders when input is empty
   useEffect(() => {
     if (promptText) return;
